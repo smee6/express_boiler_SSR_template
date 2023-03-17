@@ -3,13 +3,13 @@ addEventListener("load", function () {
     $("#sidebar").load("common/sidebar.html");
     $("#footer").load("common/footer.html");
 
-    if (history.state) {
+    if (history.state && history.state.data !== "") {
         $("#content").load(`pages/${history.state.data}.html`);
         return;
     } else {
         const path = window.location.pathname.split("/")[1];
         if (path === "") return;
-        $("#content").load(`pages/${path}.html`);
+        $("#content").load(`index.html`);
     }
 });
 
@@ -18,7 +18,6 @@ function loadPage(page) {
         history.pushState({ data: `` }, '', `/`);
         return $("#content").load(`pages/index.html`);
     }
-
     if (history.state) {
         if (page === history.state.data) return;
     }

@@ -60,10 +60,11 @@ const runServer = async () => {
         app.use('/', userAuth, (req, res, next) => {
             next();
         });
-        
+
         //라우터 영역
-        app.use("/", pageRouter);
         app.use("/test", testRouter);
+        app.use("/", pageRouter);
+
 
         app.listen(process.env.SERVER_PORT, () => {
             console.log(`Server listening on port ${process.env.SERVER_PORT}`)
