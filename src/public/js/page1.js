@@ -3,12 +3,12 @@ async function page1() {
 
     var target = document.getElementById('target');
 
-    let data = await axios.get('/test').then((res) => {
-        return res.data;
+    let data = await axiosGet('/test').then((res) => {
+        return res;
     });
-    console.log(data);
-    target.innerText = data[0]._id;
-
+    target.innerText = data.map((item) => {
+        return item.name;
+    }).join(', ');
 }
 
 page1();
