@@ -36,6 +36,9 @@ const runServer = async () => {
         app.use(helmet.referrerPolicy());
         app.use(helmet.xssFilter());
 
+        //라우터 영역 접속하기 전에 userAuth를 먼저 거친다.
+        app.use(userAuth);
+
         //express 설정
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
@@ -55,11 +58,6 @@ const runServer = async () => {
         const specs = swaggerJsdoc(options);
         app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true })
         );
-
-        //유저 아이피나 그런것들 유효성 검증 (경로를 나중에 유저나 그런쪽으로 바꿔서 특정 라우터에만 태움)
-        app.use('/', userAuth, (req, res, next) => {
-            next();
-        });
 
         //라우터 영역
         app.use("/test", testRouter);

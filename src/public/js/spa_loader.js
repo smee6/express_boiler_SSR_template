@@ -9,12 +9,21 @@ addEventListener("load", function () {
     } else {
         const path = window.location.pathname.split("/")[1];
         if (path === "") return;
-        $("#content").load(`index.html`);
+        loadPage(path);
     }
 });
 
+const PageList = [
+    "page1",
+    "page2",
+];
+
 function loadPage(page) {
     if (page === '') {
+        history.pushState({ data: `` }, '', `/`);
+        return $("#content").load(`pages/index.html`);
+    }
+    if (!PageList.includes(page)) {
         history.pushState({ data: `` }, '', `/`);
         return $("#content").load(`pages/index.html`);
     }
