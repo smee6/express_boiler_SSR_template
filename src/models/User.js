@@ -1,4 +1,7 @@
+// /models/User.js
+
 const { Schema, model } = require("mongoose");
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
     uuid: {
@@ -29,6 +32,9 @@ const userSchema = new Schema({
 
 userSchema.set("toObject", { virtuals: true });
 userSchema.set("toJSON", { virtuals: true });
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: "id",
+});
 
 const User = model("user", userSchema);
 module.exports = { User };

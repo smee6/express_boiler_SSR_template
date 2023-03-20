@@ -1,7 +1,5 @@
 const userService = require('../services/userService');
 const passport = require('passport');
-const { User } = require("../models");
-
 
 exports.getUser = async (req, res) => {
     try {
@@ -34,21 +32,12 @@ exports.postUser = async (req, res) => {
     }
 }
 
-exports.login = async (req, res, next) => {
-    passport.authenticate('local', (authError, user, info) => {
-        if (authError) {
-            console.error(authError);
-            return next(authError);
-        }
-        if (!user) {
-            return res.status(401).send(info.message);
-        }
-        return req.login(user, (loginError) => {
-            if (loginError) {
-                console.error(loginError);
-                return next(loginError);
-            }
-            return res.status(200).json(user);
-        });
-    })(req, res, next);
+exports.loginUser = async (req, res, next) => {
+    try {
+        await userService.login(req, res, next);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ err: error.message });
+    }
 }
+

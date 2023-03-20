@@ -9,7 +9,7 @@ userRouter.get("/", userController.getUsers);
 
 userRouter.post("/", userController.postUser);
 
-userRouter.post("/login", userController.login);
+userRouter.post("/login", userController.loginUser);
 
 
 

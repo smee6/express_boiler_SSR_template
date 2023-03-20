@@ -5,6 +5,7 @@ const ERROR = require("../conf/error.js");
 const bcrypt = require("bcrypt");
 const passport = require('passport');
 
+
 exports.getUsers = async () => {
     //password 는 빼고 보내야 함
     const users = await User.find({}, { password: 0 });
@@ -25,11 +26,26 @@ exports.createUser = async (info) => {
 
     info.password = await bcrypt.hash(info.password, 10);
     info.uuid = user_uuid();
-    const newUser = new User(info);
-    await newUser.save();
+    const newUser = await User(info);
+    await User.register(newUser, password);
     return newUser;
 };
 
-exports.login = async (info) => {
-
+exports.login = async (req,res,next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send({ err: err.message });
+        }
+        if (!user) {
+            return res.status(401).send({ err: info.message });
+        }
+        req.login(user, (err) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send({ err: err.message });
+            }
+            return res.send(user);
+        });
+    })(req, res, next);
 };
