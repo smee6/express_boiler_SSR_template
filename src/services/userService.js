@@ -9,7 +9,6 @@ const passport = require('passport');
 exports.getUsers = async () => {
     //password 는 빼고 보내야 함
     const users = await User.find({}, { password: 0 });
-
     return users;
 };
 
@@ -45,7 +44,8 @@ exports.login = async (req,res,next) => {
                 console.log(err);
                 return res.status(500).send({ err: err.message });
             }
-            return res.send(user);
+            console.log(req.session.passport.user)
+            return res.send({ user: user.id })
         });
     })(req, res, next);
 };
