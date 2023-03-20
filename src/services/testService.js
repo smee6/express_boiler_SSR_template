@@ -3,7 +3,7 @@ const CONSTANTS = require("../conf/constant.js");
 const ERROR = require("../conf/error.js");
 
 exports.getTestData = async () => {
-    const test = await Test.find();
+    const test = await Test.find().sort({ _id: -1 });
     return test;
 };
 

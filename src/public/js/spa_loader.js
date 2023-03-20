@@ -1,6 +1,8 @@
 const PageList = [
     "page1",
     "page2",
+    "login",
+    "join",
 ];
 
 addEventListener("load", function () {
@@ -28,6 +30,12 @@ function loadPage(page) {
     }
     history.pushState({ data: `${page}` }, '', `/${page}`);
     $("#content").load(`pages/${page}.html`);
+
+
+    // document.body.classList.add('loading');
+    // setTimeout(function () {
+    //     document.body.classList.remove('loading');
+    // }, 250);
 }
 
 //history api의 state가 변경 될 때 마다 실행

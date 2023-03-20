@@ -4,7 +4,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const path = require('path');
 const mongoose = require("mongoose");
-const { pageRouter, testRouter } = require("./routes");
+const { pageRouter, testRouter, memberRouter, boardRouter } = require("./routes");
 const dotenv = require("dotenv");
 const morgan = require('morgan');
 const date = new Date();
@@ -61,6 +61,8 @@ const runServer = async () => {
 
         //라우터 영역
         app.use("/test", testRouter);
+        app.use("/board", boardRouter);
+        app.use("/member", memberRouter);
         app.use("/", pageRouter);
 
 
