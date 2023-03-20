@@ -14,7 +14,7 @@ const helmet = require('helmet');
 const { userAuth } = require("./middlewares/authUserTest");
 const passport = require('passport');
 const session = require('express-session');
-const passportConfig = require("./passport");
+const passportConfig = require("./utils/passport");
 
 if (process.env.NODE_ENV == "production") dotenv.config({ path: "./env/.env_production" });
 else dotenv.config({ path: "./env/.env_test" });
