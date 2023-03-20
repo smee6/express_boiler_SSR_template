@@ -25,7 +25,7 @@ const boardSchema = new Schema({
     },
     writer: {
         type: Schema.Types.ObjectId,
-        ref: "test",
+        ref: "user",
         required: true,
     },
 }, { timestamps: true });

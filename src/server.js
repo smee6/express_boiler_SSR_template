@@ -12,8 +12,10 @@ const today = date.getFullYear() + '_' + (date.getMonth() + 1) + '_' + date.getD
 const rfs = require('rotating-file-stream')
 const helmet = require('helmet');
 const { userAuth } = require("./middlewares/authUserTest");
-//session setting 
+const passport = require('passport');
 const session = require('express-session');
+const localStrategy = require("./passport/localStrategy.js");
+
 
 if (process.env.NODE_ENV == "production") dotenv.config({ path: "./env/.env_production" });
 else dotenv.config({ path: "./env/.env_test" });
@@ -38,6 +40,7 @@ const runServer = async () => {
         app.use(helmet.referrerPolicy());
         app.use(helmet.xssFilter());
 
+
         app.use(session({
             secret: process.env.SESSION_SECRET,
             resave: false,
@@ -49,6 +52,10 @@ const runServer = async () => {
             }
         })
         );
+
+        app.use(passport.initialize());
+        app.use(passport.session());
+
         //라우터 영역 접속하기 전에 userAuth를 먼저 거친다.
         app.use(userAuth);
 

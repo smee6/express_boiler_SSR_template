@@ -3,6 +3,7 @@ const { User } = require("../models");
 const CONSTANTS = require("../conf/constant.js");
 const ERROR = require("../conf/error.js");
 const bcrypt = require("bcrypt");
+const passport = require('passport');
 
 exports.getUsers = async () => {
     //password 는 빼고 보내야 함
@@ -29,3 +30,6 @@ exports.createUser = async (info) => {
     return newUser;
 };
 
+exports.login = async (info) => {
+
+};

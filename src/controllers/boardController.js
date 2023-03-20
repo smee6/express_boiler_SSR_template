@@ -6,11 +6,6 @@ const boardService = require("../services/boardService");
  * @description 게시판 정보를 가져온다.
  * @method GET
  * @url /board
- * @response { id: Number, title: String, content: String, createdAt: Date, updatedAt: Date }
- * @response 500 { err: String }
- * @response 404 { err: String }
- * @response 400 { err: String }
- * @response 200 { err: String }
  * */
 
 exports.getBoard = async (req, res, next) => {
@@ -29,11 +24,6 @@ exports.getBoard = async (req, res, next) => {
  * @method POST
  * @url /board
  * @body { title: String, content: String }
- * @response { id: Number, title: String, content: String, createdAt: Date, updatedAt: Date }
- * @response 500 { err: String }
- * @response 404 { err: String }
- * @response 400 { err: String }
- * @response 200 { err: String }
  * */
 
 exports.postBoard = async (req, res, next) => {
@@ -56,11 +46,6 @@ exports.postBoard = async (req, res, next) => {
  * @description 게시판 정보를 가져온다.
  * @method GET
  * @url /board/:id
- * @response { id: Number, title: String, content: String, createdAt: Date, updatedAt: Date , writer: test }
- * @response 500 { err: String }
- * @response 404 { err: String }
- * @response 400 { err: String }
- * @response 200 { err: String }
  * */
 
 exports.getBoardId = async (req, res, next) => {
