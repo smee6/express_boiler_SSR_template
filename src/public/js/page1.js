@@ -3,7 +3,7 @@ async function page1() {
 
     var target = document.getElementById('target');
 
-    let data = await axiosGet('/test').then((res) => {
+    let data = await axiosRequest('/test', 'get', '').then((res) => {
         return res;
     });
     target.innerText = data.map((item) => {

@@ -1,3 +1,8 @@
+const PageList = [
+    "page1",
+    "page2",
+];
+
 addEventListener("load", function () {
     $("#header").load("common/header.html");
     $("#sidebar").load("common/sidebar.html");
@@ -13,17 +18,8 @@ addEventListener("load", function () {
     }
 });
 
-const PageList = [
-    "page1",
-    "page2",
-];
-
 function loadPage(page) {
-    if (page === '') {
-        history.pushState({ data: `` }, '', `/`);
-        return $("#content").load(`pages/index.html`);
-    }
-    if (!PageList.includes(page)) {
+    if (page === '' || !PageList.includes(page)) {
         history.pushState({ data: `` }, '', `/`);
         return $("#content").load(`pages/index.html`);
     }
