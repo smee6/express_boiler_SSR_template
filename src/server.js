@@ -4,7 +4,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const path = require('path');
 const mongoose = require("mongoose");
-const { pageRouter, testRouter, memberRouter, boardRouter } = require("./routes");
+const { pageRouter, testRouter, userRouter, boardRouter } = require("./routes");
 const dotenv = require("dotenv");
 const morgan = require('morgan');
 const date = new Date();
@@ -12,6 +12,8 @@ const today = date.getFullYear() + '_' + (date.getMonth() + 1) + '_' + date.getD
 const rfs = require('rotating-file-stream')
 const helmet = require('helmet');
 const { userAuth } = require("./middlewares/authUserTest");
+//session setting 
+const session = require('express-session');
 
 if (process.env.NODE_ENV == "production") dotenv.config({ path: "./env/.env_production" });
 else dotenv.config({ path: "./env/.env_test" });
@@ -36,6 +38,17 @@ const runServer = async () => {
         app.use(helmet.referrerPolicy());
         app.use(helmet.xssFilter());
 
+        app.use(session({
+            secret: process.env.SESSION_SECRET,
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+                httpOnly: true,
+                secure: false,
+            }
+        })
+        );
         //라우터 영역 접속하기 전에 userAuth를 먼저 거친다.
         app.use(userAuth);
 
@@ -62,7 +75,7 @@ const runServer = async () => {
         //라우터 영역
         app.use("/test", testRouter);
         app.use("/board", boardRouter);
-        app.use("/member", memberRouter);
+        app.use("/user", userRouter);
         app.use("/", pageRouter);
 
 

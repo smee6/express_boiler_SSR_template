@@ -1,6 +1,6 @@
 module.exports = {
     ...require("./pageRouter"),
     ...require("./testRouter"),
-    ...require("./memberRouter"),
+    ...require("./userRouter"),
     ...require("./boardRouter"),
 };

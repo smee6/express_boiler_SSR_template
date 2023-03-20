@@ -7,11 +7,11 @@ exports.getTestData = async () => {
     return test;
 };
 
-exports.createTestData = async (user) => {
-    if (!user.name || !user.age) {
-        return ERROR.NO_ID_OR_AGE;
+exports.createTestData = async (info) => {
+    if (!info.name || !info.age) {
+        throw new Error(ERROR.NO_ID_OR_AGE);
     };
-    const test = new Test(user);
+    const test = new Test(info);
     await test.save();
 
     return test;
