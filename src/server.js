@@ -11,7 +11,7 @@ const date = new Date();
 const today = date.getFullYear() + '_' + (date.getMonth() + 1) + '_' + date.getDate();
 const rfs = require('rotating-file-stream')
 const helmet = require('helmet');
-const { userAuth } = require("./middlewares/authUserTest");
+const { userAuth } = require("./middlewares/authUser");
 const passport = require('passport');
 const session = require('express-session');
 const passportConfig = require("./utils/passport");
@@ -87,12 +87,12 @@ const runServer = async () => {
 
         app.listen(process.env.SERVER_PORT, () => {
             console.log(`Server listening on port ${process.env.SERVER_PORT}`)
-            
+
             //서버 주소 출력
             console.log(`http://localhost:${process.env.SERVER_PORT}`)
-            
 
-            
+
+
         })
 
     } catch (err) {
