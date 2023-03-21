@@ -87,6 +87,12 @@ const runServer = async () => {
 
         app.listen(process.env.SERVER_PORT, () => {
             console.log(`Server listening on port ${process.env.SERVER_PORT}`)
+            
+            //서버 주소 출력
+            console.log(`http://localhost:${process.env.SERVER_PORT}`)
+            
+
+            
         })
 
     } catch (err) {
