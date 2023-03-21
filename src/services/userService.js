@@ -44,7 +44,7 @@ exports.login = async (req,res,next) => {
                 console.log(err);
                 return res.status(500).send({ err: err.message });
             }
-            console.log(req.session.passport.user)
+            //console.log(req.session.passport.user)
             return res.send({ user: user.id })
         });
     })(req, res, next);
