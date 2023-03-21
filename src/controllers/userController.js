@@ -41,3 +41,11 @@ exports.loginUser = async (req, res, next) => {
     }
 }
 
+exports.logoutUser = async (req, res) => {
+    try {
+        await userService.logOut(req, res);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ err: error.message });
+    }
+}

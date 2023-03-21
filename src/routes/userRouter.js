@@ -11,6 +11,8 @@ userRouter.post("/", userController.postUser);
 
 userRouter.post("/login", userController.loginUser);
 
+userRouter.post("/logout", userController.logoutUser);
+
 
 
 module.exports = { userRouter };

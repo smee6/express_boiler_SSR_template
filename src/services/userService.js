@@ -44,8 +44,16 @@ exports.login = async (req,res,next) => {
                 console.log(err);
                 return res.status(500).send({ err: err.message });
             }
-            //console.log(req.session.passport.user)
+            console.log(req.session.passport)
             return res.send({ user: user.id })
         });
     })(req, res, next);
 };
+
+exports.logOut = async (req, res) => {
+    req.logout(() => {
+        console.log(req.session.passport)
+        return res.send({ msg: 'logout success' });
+      });
+    
+}
